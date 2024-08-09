@@ -1,0 +1,97 @@
+server:
+  port: 8088
+
+spring:
+
+  #mogo shop12
+#  data:
+#    mongodb:
+#      auto-index-creation: true
+#      uri: mongodb+srv://hoanghieu:FvB9pzRb3LhAOUdi@hoanghieu.9e7drwu.mongodb.net/shop12
+  data:
+    mongodb:
+      auto-index-creation: true
+      uri: mongodb://admin:waSGz3gFlJq5WmX@localhost:27017/spring
+
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/shopapp?useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: waSGz3gFlJq5WmX
+
+#  redis:
+#    host: localhost
+#    port: 6379
+#    password: waSGz3gFlJq5WmX
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  kafka:
+    bootstrap-servers: "localhost:19092,localhost:19093,localhost:19094"
+    consumer:
+      group-id: spring-local-consumer
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: waSGz3gFlJq5WmX
+
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  web:
+    resources:
+      add-mappings: false
+
+application:
+
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      access-token:
+        expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
+
+  i18n:
+    locale:
+      language: en
+    resources:
+      - classpath:jwt-spring-security/messages
+
+  kafka:
+    topic:
+      partition-count: 3
+      debezium:
+        kafka_topic_product: "shopapp_local.shopapp.products"
+      create_product: "shopapp.create_product"
+
+  rabbitmq:
+    properties:
+      concurrent_consumers: 3
+      max_concurrent_consumers: 10
+      prefetch: 1
+      max_attempts: 3
+      initial_interval: 30000
+      multiplier: 2.0
+      max_interval: 60000
+    queue:
+      create_product: "create_product"
+api:
+  prefix: api/v1
