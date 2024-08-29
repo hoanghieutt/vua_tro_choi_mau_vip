@@ -17,6 +17,8 @@ import java.util.Objects;
 @Component
 @RequiredArgsConstructor
 @Slf4j
+
+// lắng nghe từ comfix vừa mới tạo mới
 public class ProductRabbitmqListener {
 
     private final IProductService productService;

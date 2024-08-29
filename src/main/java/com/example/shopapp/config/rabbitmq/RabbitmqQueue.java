@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 
 // lớp cấu hình của bạn để định nghĩa hàng đợi RabbitMQ.
 @Configuration
+
+// tạo key cho rabbitmq
 public class RabbitmqQueue {
     @Value("${application.rabbitmq.queue.create_product}")
     private String queueCreateProduct;

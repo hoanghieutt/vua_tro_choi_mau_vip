@@ -44,9 +44,13 @@ public class ProductController {
 
     @PostMapping("kafka")
     public void createtest( @Valid @RequestBody ProductDTO request) throws Exception {
-//        Product  product = productService.createProduct(request);
         productService.kafkaCreate(request);
     }
+    @PostMapping("rabbitmq")
+    public void createQueue(@Valid @RequestBody ProductDTO requet) throws Exception {
+        productService.rabbitCreate(requet);
+    }
+
 
     @PostMapping("")
     //POST http://localhost:8088/v1/api/products
@@ -64,7 +68,8 @@ public class ProductController {
             }
             Product newProduct = productService.createProduct(productDTO);
             log.info("This is an info message");
-            return ResponseEntity.badRequest().body(newProduct);
+//            return ResponseEntity.badRequest().body(newProduct);
+            return ResponseEntity.ok().body(new SuccessResponse<>(newProduct));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -160,7 +165,6 @@ public class ProductController {
                 .product(products)
                 .totalPage(totalpages)
                 .build()
-
         );
     }
 
@@ -175,7 +179,6 @@ public class ProductController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
 
     @DeleteMapping("/{id}")

@@ -18,6 +18,9 @@ import java.util.Objects;
 // Tự động tạo constructor với tất cả các trường final hoặc trường được đánh dấu bằng @NonNull
 @RequiredArgsConstructor
 @Slf4j
+
+
+// lắng nghe key từ confix mới tạo
 public class ProductKafkaListener {
 
   private final IProductService productService;

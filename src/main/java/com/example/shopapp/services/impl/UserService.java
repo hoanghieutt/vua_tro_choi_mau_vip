@@ -7,6 +7,7 @@ import com.example.shopapp.models.User;
 import com.example.shopapp.repositories.RoleRepository;
 import com.example.shopapp.repositories.UserRepository;
 import com.example.shopapp.services.IUserService;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,10 @@ public class UserService implements IUserService {
     public String login(String phonNumer, String passWord) {
         // liên quan đến phần scurity
         return null;
+    }
+
+    @Override
+    public Optional<User> findByFullname(String username) {
+        return userRepository.findByFullname(username);
     }
 }

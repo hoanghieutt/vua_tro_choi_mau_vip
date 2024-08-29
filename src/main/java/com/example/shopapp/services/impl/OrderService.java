@@ -8,11 +8,9 @@ import com.example.shopapp.repositories.OrderRepository;
 import com.example.shopapp.repositories.UserRepository;
 import com.example.shopapp.services.IOrderService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class SuccessResponse<T> extends BaseResponse{
     public SuccessResponse(T data) {
-        super(LocalDateTime.now(),"success","",data);
+        super(LocalDateTime.now(),"success","xong heetd phim",data);
     }
     public SuccessResponse(String message) {
             super(LocalDateTime.now(),"success",message,null);

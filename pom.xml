@@ -8,11 +8,11 @@
 		<version>3.3.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>shopapp</artifactId>
+	<groupId>com.spring</groupId>
+	<artifactId>jwt-spring-security</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>shopapp</name>
-	<description>Demo project for Spring Boot</description>
+	<name>jwt-spring-security</name>
+	<description>jwt-spring-security</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -139,6 +139,10 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>

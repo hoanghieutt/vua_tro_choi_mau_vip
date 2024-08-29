@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
+
+// tạo key cho kafka
 public class Kafkatopic {
     // biến để lưu tên chủ đề Kafka mà sẽ được tạo ra.
     @Value("${application.kafka.topic.create_product}")

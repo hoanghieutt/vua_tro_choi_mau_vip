@@ -12,6 +12,7 @@ import com.example.shopapp.repositories.CategoryRepository;
 import com.example.shopapp.repositories.ProductImageRepository;
 import com.example.shopapp.repositories.ProductRepository;
 import com.example.shopapp.services.IProductService;
+import com.example.shopapp.services.RabbitmqService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductService implements IProductService {
 
+    @Value("${application.rabbitmq.queue.create_product}")
+    private String queueCreateProduct;
+
     @Value("${application.kafka.topic.create_product}")
     private String topicCreateProduct;
 
@@ -34,6 +38,7 @@ public class ProductService implements IProductService {
     private final ProductImageRepository productImageRepository;
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final RabbitmqService rabbitmqService;
     @Override
     public Product createProduct(ProductDTO productDTO) throws Exception {
         Category existingcategory = categoryRepository.findById(productDTO.getCategoryId())
@@ -135,5 +140,13 @@ public class ProductService implements IProductService {
     @Override
     public void kafkaCreate(ProductDTO product) {
         kafkaTemplate.send(topicCreateProduct,product);
+    }
+
+    @Override
+    public void rabbitCreate(ProductDTO product) throws Exception {
+        if (product.equals("")){
+            throw new InvalidParameterException("productDTO null");
+        }
+        rabbitmqService.push(queueCreateProduct,product);
     }
 }
